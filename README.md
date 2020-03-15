@@ -1,4 +1,4 @@
-#Phase Drifter
+** Phase Drifter **
 Welcome to the Phase Drifter Repo!
 
-Currently you can browse the 'test_level' folder which has all the files and assets for our test level. 
+Please use the phase_drifter folder to access the project documents. test_level folder can be ignored. 

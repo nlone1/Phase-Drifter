@@ -1,6 +1,6 @@
 
     // The data/time we want to countdown to
-    var countDownDate = new Date("Jul 25, 2021 16:37:52").getTime();
+    var countDownDate = new Date("May 5, 2020 00:00:00").getTime();
 
     // Run myfunc every second
     var myfunc = setInterval(function() {
@@ -41,20 +41,4 @@
 
 
 
-
-// var endDate = new Date("Jan 25, 2020 12:00:00").getTime();
-// var timer = setInterval(function () {
-// let now = new Date().getTime();
-// let t = endDate - now;
-// if (t >= 0) {
-// document.getElementById("remainder").innerHTML = 
-// Math.floor(t / (1000 * 60 * 60 * 24)) + "DAY(S) " + 
-// ("0" + Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).slice(-2) + "HR(S) " + 
-// ("0" + Math.floor((t % (1000 * 60 * 60)) / (1000 * 60))).slice(-2) + "MIN(S) " +
-// ("0" + Math.floor((t % (1000 * 60)) / 1000)).slice(-2) + "SEC(S)";
-// } else {
-// document.getElementById("remainder").innerHTML = "End of timer.";
-// }
-
-// }, 1000);
 

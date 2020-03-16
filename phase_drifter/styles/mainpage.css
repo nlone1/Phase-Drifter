@@ -1,0 +1,114 @@
+p {
+    animation: 1s ease-out 0s 1 fadeInAnimation;
+    display: inline;
+    font-family: "Mansalva", Roboto;
+    font-size: 60px;
+    color: #70dfdf;
+}
+
+
+html { 
+    background: url(../htmldocs/background.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+@keyframes fadeInAnimation { 
+    0% { 
+        opacity: 0; 
+    } 
+    100% { 
+        opacity: 1; 
+    } 
+} 
+
+.logoNavbar{
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+	color: white;
+}
+
+.logo{
+    /* This section calls the slideInFromLeft animation we defined above */
+    animation: 1s ease-out 0s 1 fadeInAnimation;    
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    text-align: center;
+}
+
+.pageTitle{
+    animation: 1s ease-out 0s 1 fadeInAnimation;   
+    margin-top:-55px;
+    margin-bottom:-30px;
+    text-align: center;
+    color: white;
+    font-size: 32px;
+    text-shadow: 3px 3px 1px #C62F27, -3px -3px 1px #4DEFFF, 4px 1px 1px #C1FF00;
+
+}
+
+.w3-mansalva {
+    font-family: "Mansalva", Roboto;
+}
+
+.button {
+    background-color: #2A2827; /* grey background */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    border-radius: 4px;
+    cursor: crosshair;
+    text-shadow: 0px 2px 1px #C62F27, 0px -2px 1px #4DEFFF, 2px 0px 1px #C1FF00;
+}
+
+.navContain{
+    margin: 0 auto;
+    width: 50%;
+}
+
+
+.highScoreContainer {
+	display: flex;
+    justify-content: center;
+	height: 200px;
+    color: white;
+	align-items: center;
+	padding: 5px;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+.p1 {
+	background-color: rgba(42, 40, 39, 0.3);
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.name {
+	width: 230px;
+	text-align: left
+	
+}
+.score {
+	width: 230px;
+	text-align: right
+
+}
+
+
+ol {
+    padding-left: 0;
+}​
+

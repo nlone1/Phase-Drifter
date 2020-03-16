@@ -78,7 +78,6 @@ class Scene2 extends Phaser.Scene {
 
         about.on("pointerup", ()=>{
             console.log("about clicked");
-            window.location.replace("../htmldocs/about.html");
         })
     }
 

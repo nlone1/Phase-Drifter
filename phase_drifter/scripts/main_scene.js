@@ -4,7 +4,7 @@ var config = {
     height: 600,
     pixelArt: true,
     parent: "gameWindow",
-    scene: [Scene1, Scene2]
+    scene: [boot_scene, menu_scene, level1_scene]
 };
 
 var game = new Phaser.Game(config);
@@ -15,7 +15,6 @@ function preload ()
 
 function create ()
 {
-
 }
 
 function update ()

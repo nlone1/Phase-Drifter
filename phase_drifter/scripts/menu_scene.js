@@ -3,7 +3,7 @@ var score;
 var about;
 var pointer;
 
-class Scene2 extends Phaser.Scene {
+class menu_scene extends Phaser.Scene {
     constructor() {
         super("playGame");
     }
@@ -46,9 +46,10 @@ class Scene2 extends Phaser.Scene {
 
         play.on("pointerup", ()=>{
             console.log("play clicked");
+            this.scene.start("level1");
         })
 
-        // Highscpre button activity
+        // Highscore button activity
         score.on("pointerover", ()=>{
             pointer.setVisible(true);
             pointer.x=250;

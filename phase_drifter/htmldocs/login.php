@@ -1,20 +1,38 @@
 <?php
-session_start(); // Session start
-if(isset($_POST['check'])) // Check form submit with IF Isset function
-{
-	$username="admin"; // set variable value
-	$password="123"; // set variable value
-	if($_POST['username']==$username && $_POST['password']==$password) // Check Given user name, password and Variable user name password are same
-	{
-		$success = "Login Successful, Redirecting";
-		$_SESSION['username']=$username; // set session from given user name
-		header("Refresh:2;url=index.html");
-	}
-	else
-	{
-		$err="Authentication Failed Try again!";
-	}
+//I think this forces https for this page
+if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") {
+    $location = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . $location);
+    exit;
 }
+//Start session required for any session page
+session_start();
+if(isset($_SESSION["sessionUser"])){
+	header( "Location: index.php" );
+} 
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	$username = $_POST['username'];
+	$pass = $_POST['password'];
+	$postback = $_POST['postback'];
+		if ($pass == 'guest' && strlen($username) > 3) {
+			$_SESSION["sessionUser"] = "$username";
+			$loginFail=false;
+			//Dont forget to try adding the delay and message if this works
+			header("Refresh:2;url=index.php");
+			//header( "Location: index.php" );
+		}
+		else{
+			$loginFail=true;
+		}
+}
+
+if(empty($postback)){
+	$postback = FALSE;
+}
+
 ?>
 
 
@@ -45,19 +63,51 @@ if(isset($_POST['check'])) // Check form submit with IF Isset function
 
 <div class="w3-mansalva highScoreContainer">
 	<div class="name">
-			<?php if(isset($err)){ echo $err; } ?> <!-- Print Error -->
-			<form method="POST" name="loginauth" target="_self">
-				User Name: <input name="username" size="20" type="text" />
-				<br/><br/>
-				Pass Word: <input name="password" size="20" type="password" />
-				<br/><br/>
-				<input name="check" type="submit" value="Authenticate" />
+	
+<?php
+//Im putting all of the user feedback messages here	
+
+//This shows an error message if postback is set and a credintial doesnt conform to the rules
+//else if was used to keep more than one message from showing
+if ($postback && strlen($username)<4) {
+	echo "Please enter a valid username.";
+}
+else if ($postback && strlen($pass)<4) {
+	echo "Please enter a valid password.";
+}
+else if (isset($loginFail)){
+	if ($loginFail){echo "Invalid Login credentials!";}
+}
+if (isset($loginFail)){
+	if (!$loginFail){
+		echo "Login Success, redirecting!";
+		
+}
+	
+}
+?>
+
+			<form method="post" class="formLayout">
+				<label>Username:</label>
+				<input type="text" name="username" value="<?php  if (isset($username)) echo $username; ?>" 
+						class="formElement" 
+						title="first name" required autofocus /><br>
+
+				<label>Password:</label>
+				<input type="password" name="password" value="<?php if (isset($pass)) echo $pass; ?>"
+						class="formElement" 
+						title="password" required /><br>
+	
+				<label> </label>
+				<input type="hidden" name="postback" value="true">
+				<input type="submit" name="loginButton" value="Login">
+			</form>   
+				
+			<form action="index.php">
+				<label></label>
+				<!–– Try to go straight to the protected page ––>
+					<input type="submit" name="skipLogin" value="Skip to game">
 			</form>
-			
-			<form action="index.html">
-				<input type="submit" value="Skip to game">
-			</form>
-			<?php if(isset($success)){ echo "<h3>".$success."</h3>"; } ?>
 	</div>
 </div>
 

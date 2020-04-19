@@ -24,6 +24,22 @@ html {
     } 
 } 
 
+input[type=submit] {
+	color: white;
+	font-family: "Mansalva", Roboto;
+	border: 2px solid white;
+	background-color: black;
+	padding: 2px;
+	margin-top: 2px;
+}
+
+input[type=submit]:hover {
+	color: black;
+	border: 2px solid darkgrey;
+	background-color: white;
+}
+
+
 .logoNavbar{
     margin: 0 auto;
     padding: 0;

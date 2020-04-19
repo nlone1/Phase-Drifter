@@ -6,7 +6,7 @@ class level2_scene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', '../assets/level2/background2.png');
+        this.load.image('background2', '../assets/level2/background2.png');
         this.load.image('plat1-2', '../assets/level2/tile1.png'); // center pixel = 62
         this.load.image('plat2-2', '../assets/level2/tile2.png'); // center pixel = 68
         this.load.image('plat3-2', '../assets/level2/tile3.png'); // center pixel = 62
@@ -35,7 +35,7 @@ class level2_scene extends Phaser.Scene {
 
     create() {
         // Add background
-        this.add.image(400, 300, 'background');
+        this.add.image(400, 300, 'background2');
 
         // create bottom world bound
         bounds = this.physics.add.staticGroup();

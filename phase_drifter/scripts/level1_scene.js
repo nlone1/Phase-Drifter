@@ -1,9 +1,15 @@
+// These two variables represent the monster's boundaries which are the start and end of the platform
+//var enemyMaxX = 720;
+//var enemyMinX = 380;
 class level1_scene extends Phaser.Scene {
     constructor() {
         super("level1");
     }
 
     preload() {
+        this.load.image('end_screen', '../assets/restart_menu.png');
+        this.load.image('restart', '../assets/restart.png');
+        this.load.image('menu1', '../assets/menu.png');
         this.load.image('background', '../assets/level_1/background.png');
         this.load.image('plat1', '../assets/level_1/tile1.png'); // center pixel = 155
         this.load.image('plat2', '../assets/level_1/tile2.png'); // center pixel = 52
@@ -13,6 +19,11 @@ class level1_scene extends Phaser.Scene {
         this.load.image('key', '../assets/level_1/key.png');
         this.load.image('spikes', '../assets/level_1/spikes.png'); // center pixel; = 47
         this.load.image('door', '../assets/door.png'); // center pixel = 52
+        this.load.image('bounds', '../assets/worldBound.png');
+        this.load.spritesheet('monster1', '../assets/monster1.png', {
+            frameWidth: 64,
+            frameHeight: 24
+        });
         this.load.spritesheet('dude', '../assets/dude.png', {
             frameWidth: 32,
             frameHeight: 36
@@ -22,6 +33,11 @@ class level1_scene extends Phaser.Scene {
     create() {
         // Add background
         this.add.image(400, 300, 'background');
+
+        // create bottom world bound
+        bounds = this.physics.add.staticGroup();
+        bounds.create(400, 598, 'bounds');
+        bounds.setVisible(false);
 
         // Create a static physics group and assign it to platforms
         platforms = this.physics.add.staticGroup();
@@ -41,7 +57,7 @@ class level1_scene extends Phaser.Scene {
         platforms.create(202,540, 'plat4');
         platforms.create(80,540, 'plat5');
 
-        // Create spikes as static grouop and add them to level
+        // Create spikes as static group and add them to level
         spikes = this.physics.add.staticGroup();
         spikes.create(367, 183, 'spikes');
         spikes.create(587, 183, 'spikes');
@@ -49,16 +65,23 @@ class level1_scene extends Phaser.Scene {
         // Create key and add to level
         key = this.physics.add.staticGroup();
         key.create(475, 275, 'key');
-        
+
         // Create door and add to level
         door = this.physics.add.staticGroup();
         door.create(82, 460, 'door');
 
-        // Create playerxw
+        // Create Monster
+        monster1 = this.physics.add.sprite(625, 370, 'monster1');
+        monster1.setCollideWorldBounds(true);
+        monster1.setSize(34, 24);
+        enemyMaxX = 720;
+        enemyMinX = 380;
+
+        // Create player
         player = this.physics.add.sprite(176, 80, 'dude');
         player.setCollideWorldBounds(true);
         player.setSize(22,36);
-        
+
 
         // Animations for dude spritesheet
         this.anims.create({
@@ -99,9 +122,24 @@ class level1_scene extends Phaser.Scene {
             repeat: -1
         });
 
+        // Monster Animations
+        this.anims.create({
+            key: 'monster_left',
+            frames: this.anims.generateFrameNumbers('monster1', { start: 0, end: 1 }),
+            frameRate: 5,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'monster_right',
+            frames: this.anims.generateFrameNumbers('monster1', { start: 3, end: 4 }),
+            frameRate: 5,
+            repeat: -1
+        });
+
         // set hasKey to false at beginning of level and set the keyText
         hasKey = false;
-        keyText = this.add.text(16, 16, 'Key: false', { fontSize: '32px', fill: '#000' });
+        lifeText = this.add.text(16, 16, 'Lives: ' + lives, { fontSize: '32px', fill: '#000' });
 
         // create cursor which is Phaser's built in keyboard manager (suppliments event listeners)
         cursors = this.input.keyboard.createCursorKeys();
@@ -112,17 +150,43 @@ class level1_scene extends Phaser.Scene {
         // Check for collision against platforms and player
         this.physics.add.collider(player, platforms);
 
+        // These two are set to iniate the monster at the start of the level to the -x direction with the monster_left animation playing. 
+        monster1.setVelocityX(-120);
+        monster1.anims.play('monster_left', true);
+
+        // add collision for monster and platforms. Also add collision for monster and player
+        this.physics.add.collider(monster1, platforms);
+        this.physics.add.collider(player, monster1, killMonster, null, this);
+
         // check for collision against player and spikes, if found call hitSpike() from main_scene
         this.physics.add.collider(player, spikes, hitSpike, null, this);
-        
+
+        // Door collision which triggers nextLevel() function
         this.physics.add.overlap(player, door, nextLevel, null, this);
+
+        // bounds collision which kills player if they go out of bounds
+        this.physics.add.collider(player, bounds, hitSpike, null, this);
     }
 
     update() {
 
         // End game if gameOver == true. 
         if(gameOver) {
-            return;
+            this.scene.restart();
+            lives = 3;
+            this.scene.switch('playGame');
+        }
+
+        // These two conditions are for moving the monster left to right once it hits the platforms left and right
+        // bounds which are stored in the enemyMaxX and enemyMaxY variables. 
+        // enemyMaxX = 720 which is the right end of the platform 
+        if (monster1.x >= enemyMaxX) {
+            monster1.setVelocityX(-120);         
+            monster1.anims.play('monster_left', true);
+            // enemyMinX = 325 which is the left end of the platform
+        } else if (monster1.x <= enemyMinX) {
+            monster1.setVelocityX(120);
+            monster1.anims.play('monster_right', true);
         }
 
         // Controller code for player. These conditionals are checking what key is pressed to execute which animation.
@@ -134,9 +198,7 @@ class level1_scene extends Phaser.Scene {
             {
                 player.anims.play('jump_left');
             }
-        }
-        else if (cursors.right.isDown)
-        {
+        } else if (cursors.right.isDown) {
             player.setVelocityX(160);
 
             player.anims.play('right', true);
@@ -144,9 +206,7 @@ class level1_scene extends Phaser.Scene {
             {
                 player.anims.play('jump_right');
             }
-        }
-        else
-        {
+        } else {
             player.setVelocityX(0);
             player.anims.play('turn');
             if (!player.body.touching.down) {

@@ -16,15 +16,22 @@ var config = {
 
 var game = new Phaser.Game(config);
 var platforms;
+var platforms2;
 var spikes;
 var player;
 var cursors;
+var monster1;
 var key;
 var door;
 var hasKey;
-var keyText;
+var lifeText;
 var gameOver = false;
 var lives = 3;
+var enemyMaxX;
+var enemyMinX;
+var bounds;
+var restart;
+var menu;
 
 function preload ()
 {
@@ -44,7 +51,7 @@ function collectKey(player, key) {
     key.disableBody(true, true);
 
     hasKey = true;
-    keyText.setText('Key: true');
+    //keyText.setText('Key: true');
 }
 
 // Function used to kill player on spike hit. Everytime this function is called, it will
@@ -60,11 +67,28 @@ function hitSpike(player, spike) {
     }
 }
 
+function killMonster(player, monster) {
+    if (player.body.velocity.y > 0 || monster.body.blocked.up) {
+        const bounce_speed = 100;
+        player.body.velocity.y = -bounce_speed;
+        monster.destroy();
+    } else {
+        lives--;
+        player.anims.play('jump');
+        this.scene.restart();
+        console.log(lives);
+        if (lives == 0) {
+            gameOver = true;
+            console.log('game over');
+        }
+    }
+}
+
 function nextLevel(player, door) {
-     if (hasKey == true) {
-         console.log('pre-start')
-         this.scene.start("level2");
-         console.log('post-start');
-         // start second level
-     }
+    if (hasKey == true) {
+        console.log('pre-start')
+        this.scene.start("level2");
+        console.log('post-start');
+        // start second level
+    }
 }

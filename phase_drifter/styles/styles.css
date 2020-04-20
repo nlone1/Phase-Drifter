@@ -50,11 +50,6 @@ input[type=submit]:hover {
 	text-align: left;
 }
 
-.logoutButton {
-
-	float: right;
-}
-
 
 #gameWindow {
     display: block;

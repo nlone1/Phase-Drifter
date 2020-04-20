@@ -54,14 +54,14 @@ if(isset($_POST['logInOut'])){
 		<div class="sessionLogutWindow">
 			<div class="userNameContaienr">
 				<?php 
-					echo "Current user: {$username}"; 
+					echo "Current User: {$username}"; 
 				?>
 			</div>
 			<div>
 				<form method="post">
 				<label></label>
 				<!–– if logoutflag is label as login button, if not label logout ––>
-				<input type="submit" name="logInOut" value=<?php if(!$loggedOutFlag)echo "logout"; else echo "login";?>>
+				<input type="submit" name="logInOut" value=<?php if(!$loggedOutFlag)echo "Logout"; else echo "Login";?>>
 				</form>
 			</div>
 		

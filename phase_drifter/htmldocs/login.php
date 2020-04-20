@@ -40,7 +40,7 @@ if(empty($postback)){
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>Phaser Drifter | About Us</title>
+	<title>Phase Drifter | Login</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mansalva">
@@ -61,7 +61,7 @@ if(empty($postback)){
 	<h1>Login</h1>
 </div>
 
-<div class="w3-mansalva highScoreContainer">
+<div class="w3-mansalva loginContain">
 	<div class="name">
 	
 <?php
@@ -86,14 +86,16 @@ if (isset($loginFail)){
 	
 }
 ?>
-
+	
 			<form method="post" class="formLayout">
 				<label>Username:</label>
+				<br>
 				<input type="text" name="username" value="<?php  if (isset($username)) echo $username; ?>" 
 						class="formElement" 
 						title="first name" required autofocus /><br>
 
 				<label>Password:</label>
+				<br>
 				<input type="password" name="password" value="<?php if (isset($pass)) echo $pass; ?>"
 						class="formElement" 
 						title="password" required /><br>

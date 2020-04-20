@@ -75,7 +75,7 @@ class menu_scene extends Phaser.Scene {
 
         about.on("pointerup", ()=>{
             console.log("about clicked");
-            window.location.replace("../htmldocs/about.html");
+            window.location.replace("../htmldocs/about.php");
         })
     }
 

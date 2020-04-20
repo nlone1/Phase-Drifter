@@ -165,7 +165,7 @@ class level1_scene extends Phaser.Scene {
         this.physics.add.collider(player, spikes, hitSpike, null, this);
 
         // Door collision which triggers nextLevel() function
-        this.physics.add.overlap(player, door, nextLevel, null, this);
+        this.physics.add.overlap(player, door, goLevel2, null, this);
 
         // bounds collision which kills player if they go out of bounds
         this.physics.add.collider(player, bounds, hitSpike, null, this);
@@ -180,9 +180,7 @@ class level1_scene extends Phaser.Scene {
             this.scene.switch('gameOver');
         }
 
-        // These two conditions are for moving the monster left to right once it hits the platforms left and right
-        // bounds which are stored in the enemyMaxX and enemyMaxY variables. 
-        // enemyMaxX = 720 which is the right end of the platform 
+        // keep monster in bounds
         if (monster1.x >= enemyMaxX) {
             monster1.setVelocityX(-120);         
             monster1.anims.play('monster_left', true);

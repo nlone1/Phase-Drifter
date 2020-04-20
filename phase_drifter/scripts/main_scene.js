@@ -11,12 +11,14 @@ var config = {
         }
     },
     parent: "gameWindow",
-    scene: [boot_scene, menu_scene, level1_scene, level2_scene, gameOver_scene]
+    scene: [boot_scene, menu_scene, level1_scene, level2_scene, level3_scene, gameOver_scene]
 };
 
 var game = new Phaser.Game(config);
 var platforms;
 var platforms2;
+var platforms3;
+var fPlatform // moving/floating platforms
 var spikes;
 var player;
 var cursors;
@@ -37,6 +39,12 @@ var score;
 var about;
 var pointer;
 var retry;
+var spikeball1;
+var spikeball2;
+var switch1;
+var switchDown; // check if switch is down as boolean
+var arrow;
+var arrowTouch;
 
 function preload ()
 {
@@ -89,10 +97,34 @@ function killMonster(player, monster) {
     }
 }
 
-function nextLevel(player, door) {
+// Function to activate switch and play the arrow animation
+function activateSwitch(player, switch1) {
+    switchDown = false;
+    arrow.setVisible(true);
+    arrow.anims.play('arrowUp', true);
+}
+
+function arrowTrigger(player, arrow) {
+    if (switchDown == false) {
+        arrowTouch = true;
+        arrow.setVisible(false);
+    }
+}
+    
+// Function that takes you to next level
+function goLevel2(player, door) {
     if (hasKey == true) {
         console.log('pre-start')
-        this.scene.start("level2");
+        this.scene.switch("level2");
+        console.log('post-start');
+        // start second level
+    }
+}
+
+function goLevel3(player, door) {
+    if (hasKey == true) {
+        console.log('pre-start')
+        this.scene.switch("level3");
         console.log('post-start');
         // start second level
     }

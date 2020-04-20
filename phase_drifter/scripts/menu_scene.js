@@ -1,8 +1,3 @@
-var play;
-var score;
-var about;
-var pointer;
-
 class menu_scene extends Phaser.Scene {
     constructor() {
         super("playGame");

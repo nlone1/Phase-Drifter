@@ -34,6 +34,9 @@ class level2_scene extends Phaser.Scene {
     }
 
     create() {
+
+        this.cameras.main.fadeIn(1000);
+
         // Add background
         this.add.image(400, 300, 'background2');
 
@@ -178,7 +181,7 @@ class level2_scene extends Phaser.Scene {
         if(gameOver) {
             this.scene.restart();
             lives = 3;
-            this.scene.switch('playGame');
+            this.scene.switch('gameOver');
         }
 
         if (monster1.x >= enemyMaxX) {

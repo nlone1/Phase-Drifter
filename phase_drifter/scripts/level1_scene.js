@@ -31,6 +31,9 @@ class level1_scene extends Phaser.Scene {
     }
 
     create() {
+
+        this.cameras.main.fadeIn(1000);
+
         // Add background
         this.add.image(400, 300, 'background');
 
@@ -174,7 +177,7 @@ class level1_scene extends Phaser.Scene {
         if(gameOver) {
             this.scene.restart();
             lives = 3;
-            this.scene.switch('playGame');
+            this.scene.switch('gameOver');
         }
 
         // These two conditions are for moving the monster left to right once it hits the platforms left and right

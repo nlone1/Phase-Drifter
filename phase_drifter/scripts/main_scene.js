@@ -11,7 +11,7 @@ var config = {
         }
     },
     parent: "gameWindow",
-    scene: [boot_scene, menu_scene, level1_scene, level2_scene]
+    scene: [boot_scene, menu_scene, level1_scene, level2_scene, gameOver_scene]
 };
 
 var game = new Phaser.Game(config);
@@ -32,6 +32,11 @@ var enemyMinX;
 var bounds;
 var restart;
 var menu;
+var play;
+var score;
+var about;
+var pointer;
+var retry;
 
 function preload ()
 {

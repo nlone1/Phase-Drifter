@@ -14,6 +14,7 @@ class level3_scene extends Phaser.Scene {
         this.load.image('spikeball', '../assets/level2/spike_ball.png');
         this.load.image('bounds', '../assets/worldBound.png');
         this.load.image('key', '../assets/level_1/key.png');
+        this.load.image('doorTrigger', '../assets/doorTrigger.png');
         this.load.image('door', '../assets/door.png'); // center pixel = 52
         this.load.spritesheet('switch', '../assets/level3/switch.png', {
             frameWidth: 80,
@@ -84,6 +85,9 @@ class level3_scene extends Phaser.Scene {
         // Create door and add to level
         door = this.physics.add.staticGroup();
         door.create(62, 448, 'door');
+        doorTrigger = this.physics.add.staticGroup();
+        doorTrigger.create(62, 493, 'doorTrigger');
+        doorTrigger.setVisible(false);
 
         // create spikeball 1
         spikeball1 = this.physics.add.sprite(572, 55, 'spikeball');
@@ -220,8 +224,8 @@ class level3_scene extends Phaser.Scene {
         // check for collision against player and spikes, if found call hitSpike() from main_scene
         this.physics.add.collider(player, spikes, hitSpike, null, this);
 
-        // Door collision which calls the nextLevel function
-        this.physics.add.overlap(player, door, goLevel4, null, this);
+        // DoorTrigger collision which calls the nextLevel function
+        this.physics.add.overlap(player, doorTrigger, goLevel4, null, this);
 
         // bounds collision which kills player if they go out of bounds
         this.physics.add.collider(player, bounds, hitSpike, null, this);
@@ -247,7 +251,7 @@ class level3_scene extends Phaser.Scene {
         if (switchDown == false) {
             switch1.anims.play('switch_up', true);
         }
-        
+
         // Code to activate moving paltform and stop it once it's Y coordinate is 133
         if (arrowTouch == true) {
             fPlatform.setVelocityY(-80);

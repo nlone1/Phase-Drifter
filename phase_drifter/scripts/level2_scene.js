@@ -21,6 +21,7 @@ class level2_scene extends Phaser.Scene {
         this.load.image('spikes-2', '../assets/level2/spikes2.png'); // center pixel = 107
         this.load.image('spikeball', '../assets/level2/spike_ball.png');
         this.load.image('bounds', '../assets/worldBound.png');
+        this.load.image('doorTrigger', '../assets/doorTrigger.png');
         this.load.image('key', '../assets/level_1/key.png');
         this.load.image('door', '../assets/door.png'); // center pixel = 52
         this.load.spritesheet('monster1', '../assets/monster1.png', {
@@ -79,6 +80,9 @@ class level2_scene extends Phaser.Scene {
         // Create door and add to level
         door = this.physics.add.staticGroup();
         door.create(716, 100, 'door');
+        doorTrigger = this.physics.add.staticGroup();
+        doorTrigger.create(716, 145, 'doorTrigger');
+        doorTrigger.setVisible(false);
 
         // Create Monster
         monster1 = this.physics.add.sprite(420, 220, 'monster1');
@@ -166,8 +170,8 @@ class level2_scene extends Phaser.Scene {
         // check for collision against player and spikes, if found call hitSpike() from main_scene
         this.physics.add.collider(player, spikes, hitSpike, null, this);
 
-        // Door collision which calls the nextLevel function
-        this.physics.add.overlap(player, door, goLevel3, null, this);
+        // DoorTrigger collision which calls the nextLevel function
+        this.physics.add.overlap(player, doorTrigger, goLevel3, null, this);
 
         // bounds collision which kills player if they go out of bounds
         this.physics.add.collider(player, bounds, hitSpike, null, this);

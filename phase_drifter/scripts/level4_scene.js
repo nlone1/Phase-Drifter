@@ -15,6 +15,7 @@ class level4_scene extends Phaser.Scene {
         this.load.image('key', '../assets/level_1/key.png');
         this.load.image('bounds', '../assets/worldBound.png');
         this.load.image('bits', '../assets/level4/blitz.png');
+        this.load.image('doorTrigger', '../assets/doorTrigger.png');
         this.load.image('door2', '../assets/level4/door2.png');
         this.load.spritesheet('monster1', '../assets/monster1.png', {
             frameWidth: 64,
@@ -47,6 +48,9 @@ class level4_scene extends Phaser.Scene {
         // create door
         door = this.physics.add.staticGroup();
         door.create(717, 92, 'door2');
+        doorTrigger = this.physics.add.staticGroup();
+        doorTrigger.create(717, 137, 'doorTrigger');
+        doorTrigger.setVisible(false);
 
         // create key
         key = this.physics.add.staticGroup();
@@ -168,9 +172,9 @@ class level4_scene extends Phaser.Scene {
 
         // Door collision which calls the nextLevel function
         this.physics.add.overlap(player, door, goLevel3, null, this);
-        
-        // Door collision which calls the nextLevel function
-        this.physics.add.overlap(player, door, goLevel3, null, this);
+
+        // DoorTrigger collision which calls the nextLevel function
+        this.physics.add.overlap(player, doorTrigger, goLevel3, null, this);
 
         // bounds collision which kills player if they go out of bounds
         this.physics.add.collider(player, bounds, hitSpike, null, this);

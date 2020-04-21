@@ -47,6 +47,7 @@ var switch1;
 var switchDown; // check if switch is down as boolean
 var arrow;
 var arrowTouch;
+var doorTrigger; // invisible object that will trigger nextLevel() functions on player overlap
 
 function preload ()
 {
@@ -112,9 +113,9 @@ function arrowTrigger(player, arrow) {
         arrow.setVisible(false);
     }
 }
-    
+
 // Function that takes you to next level
-function goLevel2(player, door) {
+function goLevel2(player, doorTrigger) {
     if (hasKey == true) {
         console.log('pre-start')
         this.scene.switch("level2");
@@ -123,7 +124,7 @@ function goLevel2(player, door) {
     }
 }
 
-function goLevel3(player, door) {
+function goLevel3(player, doorTrigger) {
     if (hasKey == true) {
         console.log('pre-start')
         this.scene.switch("level3");
@@ -132,7 +133,7 @@ function goLevel3(player, door) {
     }
 }
 
-function goLevel4(player, door) {
+function goLevel4(player, doorTrigger) {
     if(hasKey == true) {
         console.log('pre-start')
         this.scene.switch("level4");

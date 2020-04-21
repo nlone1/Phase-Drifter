@@ -11,18 +11,20 @@ var config = {
         }
     },
     parent: "gameWindow",
-    scene: [boot_scene, menu_scene, level1_scene, level2_scene, level3_scene, gameOver_scene]
+    scene: [boot_scene, menu_scene, level1_scene, level2_scene, level3_scene, level4_scene, gameOver_scene]
 };
 
 var game = new Phaser.Game(config);
 var platforms;
 var platforms2;
 var platforms3;
-var fPlatform // moving/floating platforms
+var fPlatform; // moving/floating platforms
+var fPlatform2;
 var spikes;
 var player;
 var cursors;
 var monster1;
+var monster2;
 var key;
 var door;
 var hasKey;
@@ -125,6 +127,15 @@ function goLevel3(player, door) {
     if (hasKey == true) {
         console.log('pre-start')
         this.scene.switch("level3");
+        console.log('post-start');
+        // start second level
+    }
+}
+
+function goLevel4(player, door) {
+    if(hasKey == true) {
+        console.log('pre-start')
+        this.scene.switch("level4");
         console.log('post-start');
         // start second level
     }

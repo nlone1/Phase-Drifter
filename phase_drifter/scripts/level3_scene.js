@@ -221,7 +221,7 @@ class level3_scene extends Phaser.Scene {
         this.physics.add.collider(player, spikes, hitSpike, null, this);
 
         // Door collision which calls the nextLevel function
-        this.physics.add.overlap(player, door, goLevel3, null, this);
+        this.physics.add.overlap(player, door, goLevel4, null, this);
 
         // bounds collision which kills player if they go out of bounds
         this.physics.add.collider(player, bounds, hitSpike, null, this);

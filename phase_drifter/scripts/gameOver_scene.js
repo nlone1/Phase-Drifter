@@ -32,6 +32,7 @@ class gameOver_scene extends Phaser.Scene {
         })
 
         retry.on("pointerup", ()=>{
+            this.scene.stop();
             this.scene.start('playGame');
         })
     }

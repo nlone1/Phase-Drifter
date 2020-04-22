@@ -183,9 +183,9 @@ class level2_scene extends Phaser.Scene {
 
         // End game if gameOver == true. 
         if(gameOver) {
-            this.scene.restart();
             lives = 3;
-            this.scene.switch('gameOver');
+            this.scene.stop();
+            this.scene.start('gameOver');
         }
 
         if (monster1.x >= enemyMaxX) {

@@ -11,7 +11,7 @@ var config = {
         }
     },
     parent: "gameWindow",
-    scene: [boot_scene, menu_scene, level1_scene, level2_scene, level3_scene, level4_scene, gameOver_scene]
+    scene: [boot_scene, menu_scene, level1_scene, level2_scene, level3_scene, level4_scene, level5_scene, level6_scene, gameOver_scene]
 };
 
 var game = new Phaser.Game(config);
@@ -25,6 +25,8 @@ var player;
 var cursors;
 var monster1;
 var monster2;
+var monster3;
+var monster4;
 var key;
 var door;
 var hasKey;
@@ -43,11 +45,14 @@ var pointer;
 var retry;
 var spikeball1;
 var spikeball2;
+var spikeball3;
 var switch1;
 var switchDown; // check if switch is down as boolean
 var arrow;
 var arrowTouch;
 var doorTrigger; // invisible object that will trigger nextLevel() functions on player overlap
+var scene2;
+var family;
 
 function preload ()
 {
@@ -60,7 +65,6 @@ function create ()
 function update ()
 {
 }
-
 
 // Function used to disable key's physics body and make it invisible. 
 function collectKey(player, key) {
@@ -90,7 +94,6 @@ function killMonster(player, monster) {
         monster.destroy();
     } else {
         lives--;
-        player.anims.play('jump');
         this.scene.restart();
         console.log(lives);
         if (lives == 0) {
@@ -118,26 +121,43 @@ function arrowTrigger(player, arrow) {
 function goLevel2(player, doorTrigger) {
     if (hasKey == true) {
         console.log('pre-start')
-        this.scene.switch("level2");
+        this.scene.stop('level1');
+        this.scene.start("level2");
         console.log('post-start');
-        // start second level
     }
 }
 
 function goLevel3(player, doorTrigger) {
     if (hasKey == true) {
-        console.log('pre-start')
+        //this.scene.stop('level2');
         this.scene.switch("level3");
         console.log('post-start');
-        // start second level
     }
 }
 
 function goLevel4(player, doorTrigger) {
     if(hasKey == true) {
         console.log('pre-start')
-        this.scene.switch("level4");
+        this.scene.stop('level3');
+        this.scene.start("level4");
         console.log('post-start');
-        // start second level
+    }
+}
+
+function goLevel5(player, doorTrigger) {
+    if(hasKey == true) {
+        console.log('pre-start')
+        this.scene.stop('level4');
+        this.scene.start("level5");
+        console.log('post-start');
+    }
+}
+
+function goLevel6(player, doorTrigger) {
+    if(hasKey == true) {
+        console.log('pre-start')
+        this.scene.stop('level5');
+        this.scene.start("level6");
+        console.log('post-start');
     }
 }

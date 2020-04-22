@@ -7,9 +7,6 @@ class level1_scene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('end_screen', '../assets/restart_menu.png');
-        this.load.image('restart', '../assets/restart.png');
-        this.load.image('menu1', '../assets/menu.png');
         this.load.image('background', '../assets/level_1/background.png');
         this.load.image('plat1', '../assets/level_1/tile1.png'); // center pixel = 155
         this.load.image('plat2', '../assets/level_1/tile2.png'); // center pixel = 52
@@ -180,9 +177,9 @@ class level1_scene extends Phaser.Scene {
 
         // End game if gameOver == true. 
         if(gameOver) {
-            this.scene.restart();
             lives = 3;
-            this.scene.switch('gameOver');
+            this.scene.stop();
+            this.scene.start('gameOver');
         }
 
         // keep monster in bounds

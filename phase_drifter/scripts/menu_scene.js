@@ -15,6 +15,9 @@ class menu_scene extends Phaser.Scene {
 
     create ()
     {
+        
+        this.cameras.main.fadeIn(1000);
+        
         this.add.image(400, 300, 'sky');
         this.add.image(400, 100, 'logo');
         play = this.add.image(400, 300, 'play');
@@ -42,7 +45,8 @@ class menu_scene extends Phaser.Scene {
         play.on("pointerup", ()=>{
             console.log("play clicked");
             gameOver = false;
-            this.scene.switch("level1");
+            this.scene.stop();
+            this.scene.start("level1");
         })
 
         // Highscore button activity

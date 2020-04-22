@@ -1,22 +1,26 @@
-class level4_scene extends Phaser.Scene {
+class level5_scene extends Phaser.Scene {
     constructor() {
-        super("level4");
+        super("level5");
     }
 
     preload() {
-        this.load.image('background4', '../assets/level4/background4.png');
-        this.load.image('plat1-4', '../assets/level4/tile1.png'); // 205
-        this.load.image('plat2-4', '../assets/level4/tile2.png'); // 122, 42
-        this.load.image('plat3-4', '../assets/level4/tile3.png'); 
-        this.load.image('plat4-4', '../assets/level4/tile4.png');
-        this.load.image('plat5-4', '../assets/level4/tile5.png'); // 105, 7
-        this.load.image('plat6-4', '../assets/level4/tile6.png');
-        this.load.image('plat7-4', '../assets/level4/tile7.png'); // 85, 10
+        this.load.image('background5', '../assets/level5/background5.png');
+        this.load.image('plat1-5', '../assets/level5/tile1.png');
+        this.load.image('plat2-5', '../assets/level5/tile2.png');
+        this.load.image('plat3-5', '../assets/level5/tile3.png');
+        this.load.image('plat4-5', '../assets/level5/tile4.png');
+        this.load.image('plat5-5', '../assets/level5/tile5.png');
+        this.load.image('plat6-5', '../assets/level5/tile6.png');
+        this.load.image('plat7-5', '../assets/level5/tile7.png');
+        this.load.image('plat8-5', '../assets/level5/tile8.png');
+        this.load.image('plat9-5', '../assets/level5/tile9.png');
+        this.load.image('plat10-5', '../assets/level5/tile10.png');
+        this.load.image('door2', '../assets/level4/door2.png');
+        this.load.image('doorTrigger', '../assets/doorTrigger.png');
         this.load.image('key', '../assets/level_1/key.png');
         this.load.image('bounds', '../assets/worldBound.png');
-        this.load.image('bits', '../assets/level4/blitz.png');
-        this.load.image('doorTrigger', '../assets/doorTrigger.png');
-        this.load.image('door2', '../assets/level4/door2.png');
+        this.load.image('spikes1-5', '../assets/level5/spikes1.png');
+        this.load.image('spikes2-5', '../assets/level5/spikes2.png');
         this.load.spritesheet('monster1', '../assets/monster1.png', {
             frameWidth: 64,
             frameHeight: 24
@@ -28,60 +32,74 @@ class level4_scene extends Phaser.Scene {
     }
 
     create() {
-        
         this.cameras.main.fadeIn(1000);
-        
-        // Add background
-        this.add.image(400, 300, 'background4');
-        this.add.image(482, 523, 'bits');
+
+        // add background
+        this.add.image(400, 300, 'background5');
 
         // create bottom world bound
         bounds = this.physics.add.staticGroup();
         bounds.create(400, 598, 'bounds');
         bounds.setVisible(false);
 
-        // create static platforms
+        // add platforms
         platforms = this.physics.add.staticGroup();
-        platforms.create(205, 557, 'plat1-4');
-        platforms.create(677, 557, 'plat2-4');
-        platforms.create(717, 445, 'plat3-4');
-        platforms.create(105, 327, 'plat5-4');
-        platforms.create(715, 165, 'plat7-4');
+
+        platforms.create(685, 126, 'plat1-5');
+        platforms.create(417, 185, 'plat2-5');
+        platforms.create(540, 362, 'plat3-5');
+        platforms.create(673, 537, 'plat4-5');
+        platforms.create(60, 457, 'plat7-5');
+        platforms.create(230, 392, 'plat9-5');
+        platforms.create(355, 312, 'plat8-5');
+        platforms.create(202, 247, 'plat9-5');
+        platforms.create(65, 178, 'plat10-5');
 
         // create door
         door = this.physics.add.staticGroup();
-        door.create(717, 92, 'door2');
+        door.create(56, 108, 'door2');
         doorTrigger = this.physics.add.staticGroup();
-        doorTrigger.create(717, 137, 'doorTrigger');
+        doorTrigger.create(56, 160, 'doorTrigger');
         doorTrigger.setVisible(false);
 
-        // create key
-        key = this.physics.add.staticGroup();
-        key.create(32, 285, 'key');
-
         // create floating platforms
-        fPlatform = this.physics.add.sprite(458, 386, 'plat4-4');
+        fPlatform = this.physics.add.sprite(385, 537, 'plat5-5');
         fPlatform.body.setAllowGravity(false);
         fPlatform.body.immovable = true;
-
-        fPlatform2 = this.physics.add.sprite(350, 241, 'plat6-4');
+        fPlatform2 = this.physics.add.sprite(200, 537, 'plat6-5');
         fPlatform2.body.setAllowGravity(false);
         fPlatform2.body.immovable = true;
 
+        // create key
+        key = this.physics.add.staticGroup();
+        key.create(280, 455, 'key');
+
+        // add spikes
+        spikes = this.physics.add.staticGroup();
+        spikes.create(452, 153, 'spikes2-5');
+        spikes.create(467, 329, 'spikes1-5');
+
         // create player
-        player = this.physics.add.sprite(74, 466, 'dude');
+        player = this.physics.add.sprite(758, 64, 'dude');
         player.setCollideWorldBounds(true);
         player.setSize(22,36);
 
-        // create monster
-        monster1 = this.physics.add.sprite(720, 420, 'monster1');
+        // add monsters
+        monster1 = this.physics.add.sprite(614, 335, 'monster1');
         monster1.setCollideWorldBounds(true);
         monster1.setSize(34, 24);
 
-        // create monster2
-        monster2 = this.physics.add.sprite(82, 298, 'monster1');
+        monster2 = this.physics.add.sprite(700, 508, 'monster1');
         monster2.setCollideWorldBounds(true);
         monster2.setSize(34, 24);
+
+        monster3 = this.physics.add.sprite(232, 364, 'monster1');
+        monster3.setCollideWorldBounds(true);
+        monster3.setSize(34, 24);
+
+        monster4 = this.physics.add.sprite(210, 218, 'monster1');
+        monster4.setCollideWorldBounds(true);
+        monster4.setSize(34, 24);
 
         // Animations for dude spritesheet
         this.anims.create({
@@ -153,9 +171,12 @@ class level4_scene extends Phaser.Scene {
         // initial velocity for monsters
         monster1.setVelocityX(-80);
         monster1.anims.play('monster_left', true);
-
-        monster2.setVelocityX(80);
-        monster2.anims.play('monster_right', true);
+        monster2.setVelocityX(-80);
+        monster2.anims.play('monster_left', true);
+        monster3.setVelocityX(-60);
+        monster3.anims.play('monster_left', true);
+        monster4.setVelocityX(60);
+        monster4.anims.play('monster_right', true);
 
         // inital velocity for platforms
         fPlatform.setVelocityX(70);
@@ -167,14 +188,21 @@ class level4_scene extends Phaser.Scene {
         this.physics.add.collider(player, fPlatform)
         this.physics.add.collider(player, fPlatform2)
 
+        // check for collision against player and spikes, if found call hitSpike() from main_scene
+        this.physics.add.collider(player, spikes, hitSpike, null, this);
+
         // add collision for monster and platforms. Also add collision for monster and player
         this.physics.add.collider(monster1, platforms);
         this.physics.add.collider(player, monster1, killMonster, null, this);
         this.physics.add.collider(monster2, platforms);
         this.physics.add.collider(player, monster2, killMonster, null, this);
+        this.physics.add.collider(monster3, platforms);
+        this.physics.add.collider(player, monster3, killMonster, null, this);
+        this.physics.add.collider(monster4, platforms);
+        this.physics.add.collider(player, monster4, killMonster, null, this);
 
         // DoorTrigger collision which calls the nextLevel function
-        this.physics.add.overlap(player, doorTrigger, goLevel5, null, this);
+        this.physics.add.overlap(player, doorTrigger, goLevel6, null, this);
 
         // bounds collision which kills player if they go out of bounds
         this.physics.add.collider(player, bounds, hitSpike, null, this);
@@ -191,37 +219,56 @@ class level4_scene extends Phaser.Scene {
         }
 
         //fPlatform movement
-        if (fPlatform.x >= 575) {
+        if (fPlatform.x >= 471) {
             fPlatform.setVelocityX(-70);
-        } else if (fPlatform.x <= 270) {
+        } else if (fPlatform.x <= 364) {
             fPlatform.setVelocityX(70);
         }
 
-        if (fPlatform2.x >= 544) {
+        if (fPlatform2.x >= 215) {
             fPlatform2.setVelocityX(-70);
-        } else if (fPlatform2.x <= 285) {
+        } else if (fPlatform2.x <= 108) {
             fPlatform2.setVelocityX(70);
         }
 
-
         // Monster controlling 
-        if (monster1.x >= 778) {
+        if (monster1.x >= 643) {
             monster1.setVelocityX(-90);         
             monster1.anims.play('monster_left', true);
             // enemyMinX = 325 which is the left end of the platform
-        } else if (monster1.x <= 656) {
+        } else if (monster1.x <= 525) {
             monster1.setVelocityX(90);
             monster1.anims.play('monster_right', true);
         }
 
         // Monster controlling 
-        if (monster2.x >= 185) {
+        if (monster2.x >= 753) {
             monster2.setVelocityX(-90);         
             monster2.anims.play('monster_left', true);
             // enemyMinX = 325 which is the left end of the platform
-        } else if (monster2.x <= 24) {
+        } else if (monster2.x <= 578) {
             monster2.setVelocityX(90);
             monster2.anims.play('monster_right', true);
+        }
+
+        // Monster controlling 
+        if (monster3.x >= 273) {
+            monster3.setVelocityX(-90);         
+            monster3.anims.play('monster_left', true);
+            // enemyMinX = 325 which is the left end of the platform
+        } else if (monster3.x <= 176) {
+            monster3.setVelocityX(90);
+            monster3.anims.play('monster_right', true);
+        }
+
+        // Monster controlling 
+        if (monster4.x >= 249) {
+            monster4.setVelocityX(-90);         
+            monster4.anims.play('monster_left', true);
+            // enemyMinX = 325 which is the left end of the platform
+        } else if (monster4.x <= 151) {
+            monster4.setVelocityX(90);
+            monster4.anims.play('monster_right', true);
         }
 
         // Controller code for player. These conditionals are checking what key is pressed to execute which animation.
@@ -234,6 +281,7 @@ class level4_scene extends Phaser.Scene {
                 player.anims.play('jump_left');
             }
         }
+        
         else if (cursors.right.isDown)
         {
             player.setVelocityX(160);
@@ -257,6 +305,5 @@ class level4_scene extends Phaser.Scene {
         {
             player.setVelocityY(-230);
         }
-
     }
 }

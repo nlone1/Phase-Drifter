@@ -13,13 +13,14 @@ class InputPanel extends Phaser.Scene {
         this.text;
         this.block;
 
+        //this.name = '';
         this.name = '';
         this.charLimit = 3;
     }
 
     create ()
     {
-        let text = this.add.bitmapText(130, 240, 'arcade', 'ABCDEFGHIJ\n\nKLMNOPQRST\n\nUVWXYZ.-');
+        let text = this.add.bitmapText(130, 170, 'arcade', 'ABCDEFGHIJ\n\nKLMNOPQRST\n\nUVWXYZ.-');
 
         text.setLetterSpacing(20);
         text.setInteractive();

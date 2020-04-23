@@ -89,7 +89,7 @@ class level6_scene extends Phaser.Scene {
         spikeball3.body.setAllowGravity(false);
 
         // create player
-        player = this.physics.add.sprite(642, 393, 'dude'); // use this line for testing, otherwise comment this and uncomment line below. 
+        player = this.physics.add.sprite(642, 393, 'dude'); // use this line for testing
         //player = this.physics.add.sprite(30, 416, 'dude');
         player.setCollideWorldBounds(true);
         player.setSize(22,36);
@@ -206,7 +206,7 @@ class level6_scene extends Phaser.Scene {
         if(gameOver) {
             lives = 3;
             this.scene.stop();
-            this.scene.start('gameOver');
+            this.scene.start('Highscore');
         }
 
         // spikeball 3 bounds

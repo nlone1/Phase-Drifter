@@ -53,6 +53,8 @@ var arrowTouch;
 var doorTrigger; // invisible object that will trigger nextLevel() functions on player overlap
 var scene2;
 var family;
+var newGame = false;
+var winGame = false;
 
 // Highscore variables
 
@@ -67,6 +69,10 @@ function create ()
 
 function update ()
 {
+}
+
+function getName() {
+    console.log(name);
 }
 
 // Function used to disable key's physics body and make it invisible. 
@@ -132,14 +138,17 @@ function goLevel2(player, doorTrigger) {
 
 function goLevel3(player, doorTrigger) {
     if (hasKey == true) {
+        console.log('pre-level 3');
         //this.scene.stop('level2');
         this.scene.switch("level3");
+        //this.scene.restart("level3");
         console.log('post-start');
     }
 }
 
 function goLevel4(player, doorTrigger) {
     if(hasKey == true) {
+        lives++;
         console.log('pre-start')
         this.scene.stop('level3');
         this.scene.start("level4");
@@ -167,6 +176,7 @@ function goLevel6(player, doorTrigger) {
 
 function goHighscore(player, doorTrigger) {
     if(hasKey == true) {
+        winGame = true;
         console.log('pre-start')
         this.scene.stop('level6');
         this.scene.start("Highscore");

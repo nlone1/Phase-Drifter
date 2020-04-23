@@ -63,7 +63,7 @@ class menu_scene extends Phaser.Scene {
         score.on("pointerup", ()=>{
             console.log("score clicked");
             this.scene.stop();
-            this.scene.start('Highscore');
+			window.location.replace("../htmldocs/highscores.php");
         })
 
         // About button activity
@@ -81,7 +81,7 @@ class menu_scene extends Phaser.Scene {
 
         about.on("pointerup", ()=>{
             console.log("about clicked");
-            window.location.replace("../htmldocs/about.php");
+            window.location.replace("../htmldocs/about.html");
         })
     }
 

@@ -46,7 +46,7 @@ class menu_scene extends Phaser.Scene {
             console.log("play clicked");
             gameOver = false;
             this.scene.stop();
-            this.scene.start("level1");
+            this.scene.start("level6");
         })
 
         // Highscore button activity
@@ -62,6 +62,8 @@ class menu_scene extends Phaser.Scene {
 
         score.on("pointerup", ()=>{
             console.log("score clicked");
+            this.scene.stop();
+            this.scene.start('Highscore');
         })
 
         // About button activity

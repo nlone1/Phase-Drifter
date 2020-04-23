@@ -89,7 +89,8 @@ class level6_scene extends Phaser.Scene {
         spikeball3.body.setAllowGravity(false);
 
         // create player
-        player = this.physics.add.sprite(30, 416, 'dude');
+        player = this.physics.add.sprite(642, 393, 'dude'); // use this line for testing, otherwise comment this and uncomment line below. 
+        //player = this.physics.add.sprite(30, 416, 'dude');
         player.setCollideWorldBounds(true);
         player.setSize(22,36);
 
@@ -179,7 +180,8 @@ class level6_scene extends Phaser.Scene {
         monster1.anims.play('monster_left', true);
 
         // set hasKey to false at beginning of level and set the keyText
-        hasKey = false;
+        //hasKey = false;
+        hasKey = true; // use this for testing
         lifeText = this.add.text(16, 16, 'Lives: ' + lives, { fontSize: '32px', fill: '#000' });
 
         // create cursor which is Phaser's built in keyboard manager (suppliments event listeners)
@@ -193,6 +195,9 @@ class level6_scene extends Phaser.Scene {
         
         // bounds collision which kills player if they go out of bounds
         this.physics.add.collider(player, bounds, hitSpike, null, this);
+        
+        this.physics.add.overlap(player, doorTrigger, goHighscore, null, this);
+
     }
 
     update() {

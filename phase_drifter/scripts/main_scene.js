@@ -11,7 +11,7 @@ var config = {
         }
     },
     parent: "gameWindow",
-    scene: [boot_scene, menu_scene, level1_scene, level2_scene, level3_scene, level4_scene, level5_scene, level6_scene, gameOver_scene]
+    scene: [boot_scene, menu_scene, level1_scene, level2_scene, level3_scene, level4_scene, level5_scene, level6_scene, Starfield, Highscore, InputPanel, gameOver_scene]
 };
 
 var game = new Phaser.Game(config);
@@ -53,6 +53,9 @@ var arrowTouch;
 var doorTrigger; // invisible object that will trigger nextLevel() functions on player overlap
 var scene2;
 var family;
+
+// Highscore variables
+
 
 function preload ()
 {
@@ -158,6 +161,15 @@ function goLevel6(player, doorTrigger) {
         console.log('pre-start')
         this.scene.stop('level5');
         this.scene.start("level6");
+        console.log('post-start');
+    }
+}
+
+function goHighscore(player, doorTrigger) {
+    if(hasKey == true) {
+        console.log('pre-start')
+        this.scene.stop('level6');
+        this.scene.start("Highscore");
         console.log('post-start');
     }
 }

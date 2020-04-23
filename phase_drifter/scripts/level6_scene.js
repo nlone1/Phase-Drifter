@@ -89,7 +89,7 @@ class level6_scene extends Phaser.Scene {
         spikeball3.body.setAllowGravity(false);
 
         // create player
-        player = this.physics.add.sprite(642, 393, 'dude'); // use this line for testing
+        player = this.physics.add.sprite(160, 393, 'dude'); // use this line for testing
         //player = this.physics.add.sprite(30, 416, 'dude');
         player.setCollideWorldBounds(true);
         player.setSize(22,36);
@@ -175,7 +175,7 @@ class level6_scene extends Phaser.Scene {
 
         // monster collision
         this.physics.add.collider(monster1, platforms);
-        this.physics.add.collider(player, monster1, killMonster, null, this);  
+        this.physics.add.collider(player, monster1, killMonster, null, this);
         monster1.setVelocityX(-80);
         monster1.anims.play('monster_left', true);
 
@@ -192,17 +192,17 @@ class level6_scene extends Phaser.Scene {
 
         // Check for collision against platforms and player
         this.physics.add.collider(player, platforms);
-        
+
         // bounds collision which kills player if they go out of bounds
         this.physics.add.collider(player, bounds, hitSpike, null, this);
-        
+
         this.physics.add.overlap(player, doorTrigger, goHighscore, null, this);
 
     }
 
     update() {
-        
-        // End game if gameOver == true. 
+
+        // End game if gameOver == true.
         if(gameOver) {
             lives = 3;
             this.scene.stop();
@@ -241,9 +241,9 @@ class level6_scene extends Phaser.Scene {
             }
         }
 
-        // Monster controlling 
+        // Monster controlling
         if (monster1.x >= 222) {
-            monster1.setVelocityX(-90);         
+            monster1.setVelocityX(-90);
             monster1.anims.play('monster_left', true);
             // enemyMinX = 325 which is the left end of the platform
         } else if (monster1.x <= 113) {

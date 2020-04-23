@@ -1,9 +1,20 @@
+function setCookies(newName, hScore, redirect){
+		var d = new Date();
+		d.setTime(d.getTime() + (1*24*60*60*1000));
+		var expires = "expires=" + d.toGMTString();
+		document.cookie = 'newName=' + newName + ";" + expires + ";path=./htmldocs";
+		document.cookie = 'newScore=' + hScore + ";" + expires + ";path=./htmldocs";
+		document.cookie = 'showScore=' + redirect + ";" + expires + ";path=./htmldocs";
+	}
+
 class Highscore extends Phaser.Scene {
     constructor() {
         super("Highscore");
         this.playerText;
     }
-
+	
+	test = highscore;
+	
     preload () {
         this.load.image('block', '../assets/highscore/block.png');
         this.load.image('rub', '../assets/highscore/rub.png');
@@ -75,7 +86,8 @@ class Highscore extends Phaser.Scene {
             gameOver = false;
             this.scene.stop('InputPanel');
             this.scene.stop('Highscore');
-            this.scene.start("playGame");
+			setCookies(name, highscore, "no");
+			window.location.replace("update.php");
         })
 
         // retry button activity
@@ -94,7 +106,8 @@ class Highscore extends Phaser.Scene {
             console.log("score clicked");
             this.scene.stop('InputPanel');
             this.scene.stop('Highscore');
-            this.scene.start('level1');
+            setCookies(name, highscore, "yes");
+			window.location.replace("update.php");
         })
     }
 

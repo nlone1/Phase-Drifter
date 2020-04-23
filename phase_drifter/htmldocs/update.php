@@ -1,28 +1,27 @@
 <?php
 
-//Load Cookies
+//Load Cookies and Set variables from cookie
+if($_COOKIE) {
+	foreach ($_COOKIE as $key=>$val)
+	{
+		if ($key =='newName'){
+			$newName = $val;
+		}
+		else if ($key =='newScore'){
+			$newScore = $val;
+		}
+		else if ($key =='showScorePage'){
+			$showScorePage = $val;
+		}
 
-//Set variables from cookie
-if(!isset($_COOKIE['newName'])) {
-	$newName = $_COOKIE['newName'];
+	}
 }
-else{
-	$newName = "FOO";
-}
-if(!isset($_COOKIE['newScore'])) {
-	$newScore = $_COOKIE['newScore'];
-}
-else{
-	$newScore = 0;
-}
-if(!isset($_COOKIE['showScorePage'])) {
-	$showScorePage = $_COOKIE['showScorePage'];
-}
-else{
-	$showScorePage = false;
+else
+{
+	echo "No Cookies are Set";    
 }
 
-
+//echo($newName."<br>".$newScore."<br>".$showScorePage);
 
 //Connect to SQL Server
 $servername = "localhost";
@@ -42,7 +41,7 @@ $sql = "INSERT INTO `pdhighscores` (`Score`, `Initials`) VALUES
 
 if ($conn->query($sql) === TRUE) {
 	
-	if(showScorePage){
+	if(showScorePage=="yes"){
 		header("Location: highscores.php");
 	}
 	else{

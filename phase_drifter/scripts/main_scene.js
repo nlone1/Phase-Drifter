@@ -57,7 +57,7 @@ var newGame = false;
 var winGame = false;
 
 // Highscore variables
-var highscore;
+var highscore=1;
 
 
 function preload ()

@@ -144,6 +144,7 @@ class level1_scene extends Phaser.Scene {
         // set hasKey to false at beginning of level and set the keyText
         hasKey = false;
         lifeText = this.add.text(16, 16, 'Lives: ' + lives, { fontSize: '32px', fill: '#000' });
+        highscoreText = this.add.text(604, 16, 'Score: ' + highscore, { fontSize: '32px', fill: '#000' });
 
         // create cursor which is Phaser's built in keyboard manager (suppliments event listeners)
         cursors = this.input.keyboard.createCursorKeys();

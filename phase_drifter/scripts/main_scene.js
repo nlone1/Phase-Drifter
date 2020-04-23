@@ -58,6 +58,7 @@ var winGame = false;
 
 // Highscore variables
 var highscore=1;
+var highscoreText;
 
 
 function preload ()
@@ -101,6 +102,7 @@ function killMonster(player, monster) {
     if (player.body.velocity.y > 0 || monster.body.blocked.up) {
         const bounce_speed = 100;
         player.body.velocity.y = -bounce_speed;
+        highscore += 50;
         monster.destroy();
     } else {
         lives--;
@@ -176,7 +178,7 @@ function goLevel6(player, doorTrigger) {
         this.scene.stop('level5');
         this.scene.start("level6");
         console.log('post-start');
-        highscore += Highscore * lives;
+        highscore += highscore * lives;
     }
 }
 

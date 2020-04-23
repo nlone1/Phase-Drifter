@@ -180,9 +180,10 @@ class level6_scene extends Phaser.Scene {
         monster1.anims.play('monster_left', true);
 
         // set hasKey to false at beginning of level and set the keyText
-        //hasKey = false;
-        hasKey = true; // use this for testing
+        hasKey = false;
+        //hasKey = true; // use this for testing
         lifeText = this.add.text(16, 16, 'Lives: ' + lives, { fontSize: '32px', fill: '#000' });
+        highscoreText = this.add.text(604, 16, 'Score: ' + highscore, { fontSize: '32px', fill: '#000' });
 
         // create cursor which is Phaser's built in keyboard manager (suppliments event listeners)
         cursors = this.input.keyboard.createCursorKeys();

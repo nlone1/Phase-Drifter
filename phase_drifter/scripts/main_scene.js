@@ -57,6 +57,7 @@ var newGame = false;
 var winGame = false;
 
 // Highscore variables
+var hackighscore;
 
 
 function preload ()
@@ -75,7 +76,7 @@ function getName() {
     console.log(name);
 }
 
-// Function used to disable key's physics body and make it invisible. 
+// Function used to disable key's physics body and make it invisible.
 function collectKey(player, key) {
     key.disableBody(true, true);
 
@@ -133,6 +134,7 @@ function goLevel2(player, doorTrigger) {
         this.scene.stop('level1');
         this.scene.start("level2");
         console.log('post-start');
+        highscore += 25;
     }
 }
 
@@ -143,6 +145,7 @@ function goLevel3(player, doorTrigger) {
         this.scene.switch("level3");
         //this.scene.restart("level3");
         console.log('post-start');
+        highscore += 30;
     }
 }
 
@@ -153,6 +156,7 @@ function goLevel4(player, doorTrigger) {
         this.scene.stop('level3');
         this.scene.start("level4");
         console.log('post-start');
+        highscore += 35;
     }
 }
 
@@ -162,6 +166,7 @@ function goLevel5(player, doorTrigger) {
         this.scene.stop('level4');
         this.scene.start("level5");
         console.log('post-start');
+        highscore += 40;
     }
 }
 
@@ -171,6 +176,7 @@ function goLevel6(player, doorTrigger) {
         this.scene.stop('level5');
         this.scene.start("level6");
         console.log('post-start');
+        highscore += Highscore * lives;
     }
 }
 

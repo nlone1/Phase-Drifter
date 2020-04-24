@@ -57,7 +57,7 @@ $conn->close();
 	<div class="navContain">
 		<div><a href="index.html"><button class="button w3-mansalva">Game</button></a></div>
 		<div><a href="highscores.php"><button class="button w3-mansalva">Highscores</button></a></div>
-		<div><a href="https://www.youtube.com/watch?v=w0Xlca8TKqM"><button class="button w3-mansalva">Youtube</button></a></div>
+		<div><a href="https://www.youtube.com/watch?v=V5hyo21Zl9k"><button class="button w3-mansalva">Youtube</button></a></div>
 	</div>
 </div>
 
